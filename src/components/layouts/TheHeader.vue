@@ -2,6 +2,10 @@
   <div class="navbar navbar-default topnav">
     <div class="container">
       <div class="navbar-header">
+        <router-link to="/" class="logo">
+          gi
+          <i class="fa fa-book fa-lg">BLOG</i>
+        </router-link>
         <button type="button" class="navbar-toggle" @click="toggleNav">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -15,9 +19,7 @@
         :class="['collapse', 'navbar-collapse', { in: showCollapsedNav }]"
       >
         <!-- 入口组件 -->
-        <router-link to="/">
-          <i class="fa fa-book fa-3x">BLOG</i>
-        </router-link>
+
         <div class="navbar-right">
           <SearchInput />
           <TheEntry />
@@ -63,5 +65,13 @@ export default {
 }
 .navbar-default .navbar-nav > .active > a {
   background: rgba(0, 0, 0, 0.03);
+}
+.navbar-header .logo {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  height: 34px;
+  line-height: 34px;
+  display: inline-block;
+  min-width: 70px;
 }
 </style>
