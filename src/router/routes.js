@@ -5,14 +5,18 @@ export default [
         component: () => import('@/views/auth/Register')
     },
     {
-        path: '/',
+        path: process.env.NODE_ENV === 'production'
+            ? '/vuejs-essential/dist/'
+            : '/',
         name: 'Home',
         alias: '/topics',
         component: () => import('@/views/Home')
     },
     {
         path: '*',
-        redirect: '/'
+        redirect: process.env.NODE_ENV === 'production'
+            ? '/vuejs-essential/dist/'
+            : '/'
     },
     {
         path: '/auth/login',

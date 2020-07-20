@@ -1,14 +1,23 @@
 <template>
   <div class="footer">
     <div class="container">
-      <button
-        type="button"
-        v-clipboard:copy="message"
-        v-clipboard:success="onCopy"
-        v-clipboard:error="onError"
-      >微信</button>
-      <button @click="qqopen">QQ</button>
-      <button @click="githubopen">github</button>
+      <p>
+        <button
+          type="button"
+          class="btn btn-success btn-circle"
+          v-clipboard:copy="message"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+        >
+          <i class="fa fa-wechat"></i>
+        </button>&nbsp;
+        <button type="button" class="btn btn-info btn-circle" @click="qqopen">
+          <i class="fa fa-qq"></i>
+        </button>&nbsp;
+        <button type="button" class="btn btn-default btn-circle" @click="githubopen">
+          <i class="fa fa-github-alt"></i>
+        </button>
+      </p>
     </div>
   </div>
 </template>
@@ -23,32 +32,11 @@ export default {
     };
   },
   methods: {
-    // weixinopen() {
-    //   console.log(1);
-    //   let clipboard = new Clipboard(".copy_btn", {
-    //     text: function() {
-    //       return data.url;
-    //     }
-    //   });
-    //   clipboard.on("success", e => {
-    //     this.$message({
-    //       message: "复制成功",
-    //       showClose: true,
-    //       type: "success"
-    //     });
-    //     // 释放内存
-    //     clipboard.destroy();
-    //   });
-    //   clipboard.on("error", e => {
-    //     this.$message({ message: "复制失败,", showClose: true, type: "error" });
-    //     clipboard.destroy();
-    //   });
-    // },
     onCopy: function(e) {
-      alert("You just copied: " + e.text);
+      alert("已经帮您复制微信 " + e.text);
     },
     onError: function(e) {
-      alert("Failed to copy texts");
+      alert("复制失败");
     },
     qqopen() {
       window.location.href =

@@ -29,23 +29,31 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-2 control-label">填写兴趣</label>
+            <div class="col-sm-6">
+              <input
+                placeholder="点击回车增加兴趣"
+                @keyup.enter="addInterest(hobby)"
+                type="text"
+                class="form-control"
+                v-model="hobby"
+              />
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-sm-2 control-label">兴趣</label>
             <div class="col-sm-6">
-              <label class="checkbox-inline">
-                <input v-model="hobbies" value="泡网" type="checkbox" /> 泡网
-              </label>
-              <label class="checkbox-inline">
-                <input v-model="hobbies" value="运动" type="checkbox" /> 运动
-              </label>
-              <label class="checkbox-inline">
-                <input v-model="hobbies" value="健身" type="checkbox" /> 健身
-              </label>
-              <label class="checkbox-inline">
-                <input v-model="hobbies" value="旅游" type="checkbox" /> 旅游
-              </label>
-              <label class="checkbox-inline">
-                <input v-model="hobbies" value="游戏" type="checkbox" /> 游戏
-              </label>
+              <ul>
+                <li
+                  v-for="hobby in hobbies"
+                  :key="hobby"
+                  class="tag-style"
+                  :title="'点击移除兴趣：'+hobby"
+                  @click="removeInterest(hobby)"
+                >
+                  <button type="button" class="btn btn-default">{{ hobby }}</button>
+                </li>
+              </ul>
             </div>
           </div>
           <div class="form-group">
@@ -73,16 +81,15 @@ export default {
     return {
       username: "", // 用户名
       sex: "", // 性别
+      hobby: "",
       hobbies: [], // 兴趣
       introduction: "" // 个人简介
     };
   },
   created() {
     const user = this.$store.state.user;
-
     if (user && typeof user === "object") {
       const { name, sex, hobbies, introduction } = user;
-
       this.username = name;
       this.sex = sex || this.sex;
       this.hobbies = hobbies || this.hobbies;
@@ -103,10 +110,36 @@ export default {
           this.$message.show("修改成功");
         }
       });
+    },
+    addInterest(hobby) {
+      this.hobby = "";
+      hobby = hobby.replace(/[\s#]+/g, "");
+      if (this.hobbies.includes(hobby)) {
+        alert("已有该兴趣");
+      } else if (hobby) {
+        this.hobbies.push(hobby);
+      }
+    },
+    removeInterest(hobby) {
+      for (let i of this.hobbies.keys()) {
+        if (this.hobbies[i] === hobby) {
+          this.hobbies.splice(i, 1);
+          break;
+        }
+      }
     }
   }
 };
 </script>
 
 <style scoped>
+.form-group ul,
+.form-group ul li {
+  padding-inline-start: 0;
+  list-style: none;
+  display: inline;
+}
+.form-group ul li button {
+  margin: 0px 2px 2px 0px;
+}
 </style>

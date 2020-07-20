@@ -1,9 +1,6 @@
 <template>
   <div class="blog-container">
     <div class="blog-pages">
-      <!-- 用于渲染『文章列表』和『文章内容』 -->
-      <router-view />
-
       <div class="col-md-3 main-col pull-left">
         <div class="panel panel-default corner-radius">
           <div class="panel-body text-center topic-author-box blog-info">
@@ -27,6 +24,8 @@
           </div>
         </div>
       </div>
+      <!-- 用于渲染『文章列表』和『文章内容』 -->
+      <router-view />
     </div>
   </div>
 </template>
